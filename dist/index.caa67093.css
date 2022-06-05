@@ -1,4 +1,9 @@
-.my-flix {
-  color: steelblue;
+* {
+  box-sizing: border-box;
+}
+
+html, body, .app-container {
+  background-color: #333232;
+  font-family: "Fira Sans", sans-serif;
 }
 /*# sourceMappingURL=index.caa67093.css.map */
