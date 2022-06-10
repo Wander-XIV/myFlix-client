@@ -1,36 +1,57 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
+import { Button, Card, CardGroup, Container, Row, Col } from "react-bootstrap";
 
-//Basic display of movies that are rendered on MainView
+import "./movie-card.scss";
+
 export class MovieCard extends React.Component {
   render() {
     const { movie, onMovieClick } = this.props;
+
     return (
-      <div
-        className="movie-card"
-        onClick={() => {
-          onMovieClick(movie);
-        }}
-      >
-        {movie.Title}
-      </div>
+      <Container className="movieContainer">
+        <Row>
+          <Col>
+            <CardGroup>
+              <Card className="movieCard text-center">
+                <Card.Img
+                  className="cardImage"
+                  variant="top"
+                  src={movie.ImagePath}
+                />
+                <Card.Body>
+                  <Card.Title>{movie.Title}</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    {movie.ReleaseYear}
+                  </Card.Subtitle>
+                  <Button
+                    variant="secondary"
+                    onClick={() => onMovieClick(movie)}
+                  >
+                    Detail
+                  </Button>
+                </Card.Body>
+              </Card>
+            </CardGroup>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
 
-//setting up default values for the MovieCard properties
-//ensuring values are strings and required
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
+    ReleaseYear: PropTypes.number.isRequired,
     Description: PropTypes.string.isRequired,
     Genre: PropTypes.shape({
-      Name: PropTypes.string,
+      Name: PropTypes.string.isRequired,
     }),
     Director: PropTypes.shape({
-      Name: PropTypes.string,
+      Name: PropTypes.string.isRequired,
     }),
+    ImagePath: PropTypes.string.isRequired,
   }).isRequired,
-
   onMovieClick: PropTypes.func.isRequired,
 };
