@@ -1,26 +1,32 @@
-*{
-    box-sizing: border-box;
-  }
-  .registerContainer{
-    background: #495057;
-    width: 100%;
-    height: 100vh;
-  }
+// *{
+//     box-sizing: border-box;
+//   }
+//   .registration-form{
+//     background: #9e4040;
+//     width: 100%;
+//     height: 100vh;
+//   }
   
-  .navbar{
-    background: #376086;
-  }
+//   .navbar{
+//     background: #376086;
+//   }
   
-  .registerCard {
-    width: 100%;
-    max-width: 400px;
-    margin: auto;
-    margin-top: 50px;
-    background:white;
-    color: black;
-  }
+//   .registerCard {
+//     width: 100%;
+//     max-width: 400px;
+//     margin: auto;
+//     margin-top: 50px;
+//     background:white;
+//     color: black;
+//   }
   
-  .registerButton {
-    width: 100%;
-    display: block;
-  }
+//   .registerButton {
+//     width: 100%;
+//     display: block;
+//     background: #376086;
+//   }
+#registration-form {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  top: 30%;
+}
