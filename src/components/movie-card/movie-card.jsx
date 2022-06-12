@@ -1,41 +1,58 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, Card, CardGroup, Container, Row, Col } from "react-bootstrap";
+import axios from "axios";
+
+import { Link } from "react-router-dom";
+
+import { Button, Card } from "react-bootstrap/";
 
 import "./movie-card.scss";
 
 export class MovieCard extends React.Component {
+  addToFavoriteList(movieId) {
+    const currentUser = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
+    axios
+      .put(
+        `https://myflix-db14.herokuapp.com/users/${currentUser}/movies/${movieId}`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        alert(`The movie was successfully add to your list.`);
+      })
+      .catch((error) => console.error(error));
+  }
+
   render() {
-    const { movie, onMovieClick } = this.props;
+    const { movie } = this.props;
 
     return (
-      <Container className="movieContainer">
-        <Row>
-          <Col>
-            <CardGroup>
-              <Card className="movieCard text-center">
-                <Card.Img
-                  className="cardImage"
-                  variant="top"
-                  src={movie.ImagePath}
-                />
-                <Card.Body>
-                  <Card.Title>{movie.Title}</Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">
-                    {movie.ReleaseYear}
-                  </Card.Subtitle>
-                  <Button
-                    variant="secondary"
-                    onClick={() => onMovieClick(movie)}
-                  >
-                    Detail
-                  </Button>
-                </Card.Body>
-              </Card>
-            </CardGroup>
-          </Col>
-        </Row>
-      </Container>
+      <Card id="movie-card">
+        <Link to={`/movies/${movie._id}`}>
+          <Card.Img variant="top" src={movie.ImagePath} />
+        </Link>
+        <Card.Body>
+          <Card.Title id="card-title">{movie.Title}</Card.Title>
+          <Card.Text>{movie.Description}</Card.Text>
+          <Link to={`/movies/${movie._id}`}>
+            <Button className="button" variant="outline-success" size="sm">
+              Open
+            </Button>
+          </Link>
+          <Button
+            className="button ml-2"
+            variant="outline-success"
+            size="sm"
+            onClick={() => this.addToFavoriteList(movie._id)}
+          >
+            Add
+          </Button>
+        </Card.Body>
+      </Card>
     );
   }
 }
@@ -43,15 +60,17 @@ export class MovieCard extends React.Component {
 MovieCard.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
-    ReleaseYear: PropTypes.number.isRequired,
     Description: PropTypes.string.isRequired,
-    Genre: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-    }),
+    ImagePath: PropTypes.string.isRequired,
     Director: PropTypes.shape({
       Name: PropTypes.string.isRequired,
+      Bio: PropTypes.string.isRequired,
+      Birth: PropTypes.string.isRequired,
+      Death: PropTypes.string,
     }),
-    ImagePath: PropTypes.string.isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired,
+    }),
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired,
 };

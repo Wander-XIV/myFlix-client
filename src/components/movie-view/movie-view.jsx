@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+
+import { Button, Col, Container, Row } from "react-bootstrap/";
 
 import "./movie-view.scss";
-import { Container, Row, Col, Button } from "react-bootstrap";
 
 export class MovieView extends React.Component {
   keypressCallback(event) {
@@ -21,64 +23,37 @@ export class MovieView extends React.Component {
     const { movie, onBackClick } = this.props;
 
     return (
-      <Container fluid className="moviesContainer">
-        <Row>
-          <Col>
-            <div className="movie-view">
-              <div className="movie-poster">
-                <img src={movie.ImagePath} crossOrigin="true" />
-              </div>
-              <div className="movie-title">
-                <span className="title">Title: </span>
-                <span className="value">{movie.Title}</span>
-              </div>
-              <div className="movie-year">
-                <span className="year">ReleaseYear: </span>
-                <span className="value">{movie.ReleaseYear}</span>
-              </div>
-              <div className="movie-description">
-                <span className="description">Description: </span>
-                <span className="value">{movie.Description}</span>
-              </div>
-              <div className="movie-genre">
-                <span className="genre">Genre: </span>
-                <span className="value">{movie.Genre.Name}</span>
-              </div>
-              <div className="genre-description">
-                <span className="genre">Description: </span>
-                <span className="value">{movie.Genre.Description}</span>
-              </div>
-              <div className="movie-director">
-                <span className="director">Director: </span>
-                <span className="value">{movie.Director.Name}</span>
-              </div>
-              <div className="director-bio">
-                <span className="director">Bio: </span>
-                <span className="value">{movie.Director.Bio}</span>
-              </div>
-              <div className="director-birthyear">
-                <span className="director">BirthYear: </span>
-                <span className="value">{movie.Director.BirthYear}</span>
-              </div>
-              <div className="movie-actors">
-                <span className="actors">Actors: </span>
-                <span className="value">{movie.Actors}</span>
-              </div>
-              <div className="movie-button-div">
-                <Button
-                  className="movie-button"
-                  bg="dark"
-                  variant="dark"
-                  onClick={() => {
-                    onBackClick(null);
-                  }}
-                >
-                  Back
-                </Button>
-              </div>
-            </div>
-          </Col>
+      <Container className="movie-view">
+        <Row className="movie-poster">
+          <img src={movie.ImagePath} />
         </Row>
+        <Row className="movie-title mt-3">
+          <Col className="label">Title: </Col>
+          <Col className="value">{movie.Title}</Col>
+        </Row>
+        <Row className="movie-description mt-3">
+          <Col className="label">Description: </Col>
+          <Col className="value">{movie.Description}</Col>
+        </Row>
+        <Link to={`/directors/${movie.Director.Name}`}>
+          <Button className="d-block mt-3" variant="info">
+            Director
+          </Button>
+        </Link>
+        <Link to={`/genres/${movie.Genre.Name}`}>
+          <Button className="d-block mt-3" variant="info">
+            Genre
+          </Button>
+        </Link>
+        <Button
+          className="d-block mt-3"
+          onClick={() => {
+            onBackClick(null);
+          }}
+          variant="warning"
+        >
+          Back
+        </Button>
       </Container>
     );
   }
@@ -87,18 +62,17 @@ export class MovieView extends React.Component {
 MovieView.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
-    ReleaseYear: PropTypes.number.isRequired,
     Description: PropTypes.string.isRequired,
+    ImagePath: PropTypes.string.isRequired,
+    Director: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Bio: PropTypes.string.isRequired,
+      Birth: PropTypes.string.isRequired,
+      Death: PropTypes.string,
+    }),
     Genre: PropTypes.shape({
       Name: PropTypes.string.isRequired,
       Description: PropTypes.string.isRequired,
     }),
-    Director: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Bio: PropTypes.string.isRequired,
-      BirthYear: PropTypes.number.isRequired,
-    }),
-    Actors: PropTypes.array.isRequired,
-    ImagePath: PropTypes.string.isRequired,
   }).isRequired,
 };
