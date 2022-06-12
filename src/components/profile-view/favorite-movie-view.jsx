@@ -19,7 +19,7 @@ export function FavoriteMoviesView(props) {
   const handleMovieDelete = (movieId) => {
     axios
       .delete(
-        `https://movie-api-93167.herokuapp.com/users/${currentUser}/movies/${movieId}`,
+        `https://myflix-db14.herokuapp.com/users/${currentUser}/movies/${movieId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
