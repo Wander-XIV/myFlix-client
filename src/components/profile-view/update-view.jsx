@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import axios from "axios";
 import PropTypes from "prop-types";
+import axios from "axios";
 
-import { Button, Col, Container, Form, Row } from "react-bootstrap/";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 
-import "./registration-view.scss";
+import "./profile-view.scss";
 
-export function RegistrationView(props) {
+export function UpdateView(props) {
+  const { user } = props;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -54,29 +55,38 @@ export function RegistrationView(props) {
     e.preventDefault();
     const isReq = validate();
     if (isReq) {
+      const token = localStorage.getItem("token");
       axios
-        .post("https://myflix-db14.herokuapp.com/users", {
-          Username: username,
-          Password: password,
-          Email: email,
-          Birthday: birthday,
-        })
+        .put(
+          `https://myflix-db14.herokuapp.com/users/${user.Username}`,
+          {
+            Username: username,
+            Password: password,
+            Email: email,
+            Birthday: birthday,
+          },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
         .then((response) => {
-          const data = response.data;
-          console.log(data);
-          alert("Registration successful, please login.");
-          window.open("/", "_self");
+          console.log(response.data);
+          alert("Profile was successfully updated.");
+          window.open("/users/:username", "_self");
         })
-        .catch((e) => {
-          console.log("Error");
-          alert("Unable to register");
+        .catch((error) => {
+          console.error(error);
+          alert("Unable to update profile.");
         });
     }
   };
 
   return (
-    <Container id="registration-form">
-      <Row className="justify-content-center">
+    <Container id="update-form" className="mt-5">
+      <Row>
+        <h4>Edit profile</h4>
+      </Row>
+      <Row>
         <Col sm="10" md="8" lg="6">
           <Form>
             <Form.Group controlId="formUsername">
@@ -104,19 +114,19 @@ export function RegistrationView(props) {
               {values.passwordErr && <p>{values.passwordErr}</p>}
             </Form.Group>
             <Form.Group controlId="formEmail">
-              <Form.Label>Email:</Form.Label>
+              <Form.Label>Password:</Form.Label>
               <Form.Control
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email address"
+                placeholder="your@mail.com"
                 required
               />
               {/* display validation error */}
               {values.emailErr && <p>{values.emailErr}</p>}
             </Form.Group>
             <Form.Group controlId="formBirthday">
-              <Form.Label>Birthday:</Form.Label>
+              <Form.Label>Password:</Form.Label>
               <Form.Control
                 type="text"
                 value={birthday}
@@ -124,31 +134,14 @@ export function RegistrationView(props) {
                 placeholder="YYYY-MM-DD"
               />
             </Form.Group>
-            <Row className="mt-3 justify-content-start">
-              <Col sm="10" md="8" lg="6">
-                <Button
-                  className="registerButton"
-                  variant="secondary"
-                  size="lg"
-                  type="submit"
-                  onClick={handleSubmit}
-                >
-                  Register
-                </Button>
-              </Col>
-            </Row>
+            <Form.Group controlId="formBirthday" className="mt-3">
+              <Button variant="warning" type="submit" onClick={handleSubmit}>
+                Edit profile
+              </Button>
+            </Form.Group>
           </Form>
         </Col>
       </Row>
     </Container>
   );
 }
-
-RegistrationView.propTypes = {
-  register: PropTypes.shape({
-    Username: PropTypes.string.isRequired,
-    Password: PropTypes.string.isRequired,
-    Email: PropTypes.string.isRequired,
-    Birthday: PropTypes.string,
-  }),
-};

@@ -1,0 +1,75 @@
+#registration-form {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  top: 30%;
+}
+#login-form {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  top: 50%;
+}
+.main-view {
+  row-gap: 30px;
+}
+
+#movie-card {
+  background-color: rgb(245, 245, 245);
+  color: rgb(9, 27, 73);
+  height: 100%;
+}
+
+#card-title {
+  font-weight: bold;
+}
+
+.button {
+  border: 1px solid rgb(9, 27, 73);
+  color: rgb(9, 27, 73);
+}
+
+.button:hover {
+  background-color: rgb(9, 27, 73);
+  border: 1px solid rgb(9, 27, 73);
+  color: rgb(245, 245, 245);
+}
+.movie-view {
+  color: rgb(245, 245, 245);
+}
+
+.label {
+  font-weight: bold;
+}
+.director-view {
+  color: rgb(245, 245, 245);
+}
+
+.label {
+  font-weight: bold;
+}
+.genre-view {
+  color: rgb(245, 245, 245);
+}
+
+.label {
+  font-weight: bold;
+}
+#profile-form {
+  background-color: rgb(90, 92, 97);
+  color: rgb(245, 245, 245);
+  position: absolute;
+  top: 30%;
+}
+
+#profile-form #movie-card {
+  color: rgb(9, 27, 73);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, .app-container {
+  background-color: #333232;
+  font-family: "Fira Sans", sans-serif;
+}
+/*# sourceMappingURL=index.011f33b6.css.map */
