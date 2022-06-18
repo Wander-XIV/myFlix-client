@@ -13,7 +13,7 @@ export class MovieCard extends React.Component {
     const currentUser = localStorage.getItem("user");
     const token = localStorage.getItem("token");
     axios
-      .put(
+      .post(
         `https://myflix-db14.herokuapp.com/users/${currentUser}/movies/${movieId}`,
         {},
         {

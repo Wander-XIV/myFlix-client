@@ -38,32 +38,35 @@ export function FavoriteMoviesView(props) {
       ) : (
         favoriteMoviesList.map((movie) => {
           return (
-            <Col xs={10} sm={8} md={6} lg={4}>
-              <Card id="movie-card">
-                <Link to={`/movies/${movie._id}`}>
-                  <Card.Img variant="top" src={movie.ImagePath} />
-                </Link>
+            <Col xs={12} md={6} lg={4} key={movie._id}>
+              <Card
+                className="bg-light text-black"
+                border="danger"
+                style={{ width: "20rem", height: "20rem", margin: ".5rem" }}
+              >
+                <Card.Img
+                  variant="top"
+                  src={movie.ImagePath}
+                  crossOrigin="true"
+                  style={{ height: "12rem" }}
+                />
                 <Card.Body>
                   <Card.Title>{movie.Title}</Card.Title>
-                  <Card.Text>{movie.Description}</Card.Text>
-                  <Link to={`/movies/${movie._id}`}>
-                    <Button
-                      className="button"
-                      variant="outline-primary"
-                      size="sm"
-                    >
-                      Open
-                    </Button>
-                  </Link>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    {movie.Year}
+                  </Card.Subtitle>
                   <Button
-                    className="button ml-2"
-                    variant="outline-primary"
-                    size="sm"
-                    onClick={() => {
-                      handleMovieDelete(movie._id);
-                    }}
+                    variant="outline-danger"
+                    onClick={() => removeFav(movie._id)}
                   >
-                    Remove
+                    Remove from Favorites
+                  </Button>
+                  <Button
+                    className="ms-2"
+                    variant="danger"
+                    href={`/movies/${movie._id}`}
+                  >
+                    Details
                   </Button>
                 </Card.Body>
               </Card>
