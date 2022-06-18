@@ -1,40 +1,52 @@
-import React, { Fragment } from "react";
-import { Navbar, Container, Nav } from "react-bootstrap";
+import React from "react";
+import { Nav, Navbar, Container, Row } from "react-bootstrap";
+import "./navbar-view.scss";
 
 export function Navbar({ user }) {
+  const onLoggedOut = () => {
+    localStorage.clear();
+    window.open("/", "_self");
+  };
   const isAuth = () => {
-    let accessToken = localStorage.getItem("token");
-    if (accessToken) {
-      return accessToken;
+    if (typeof window == "undefined") {
+      return false;
+    }
+    if (localStorage.getItem("token")) {
+      return localStorage.getItem("token");
     } else {
       return false;
     }
   };
 
-  const onLoggedOut = () => {
-    localStorage.clear();
-    window.open("/", "_self");
-  };
-
   return (
-    <Navbar bg="white" expand="lg" className="mb-3">
-      <Container>
-        <Navbar.Toggle aria-controls="navbar-nav" />
-        <Navbar.Collapse>
-          <Nav className="me-auto">
+    <Navbar
+      className="mainNav"
+      sticky="top"
+      expand="lg"
+      bg="dark"
+      variant="dark"
+    >
+      <Container fluid>
+        <Navbar.Brand className="logo" href="/">
+          MyFlix Application
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar" />
+        <Navbar.Collapse id="navbar-collapse">
+          <Nav className="ml-auto nav-items">
+            {isAuth() && <Nav.Link href="/">Movies</Nav.Link>}
+            {isAuth() && <Nav.Link href={`/users/${user}`}>{user}</Nav.Link>}
             {isAuth() && (
-              <Fragment>
-                <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href={`/users/${user}`}>Profile</Nav.Link>
-                <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
-              </Fragment>
+              <Nav.Link
+                variant="link"
+                onClick={() => {
+                  onLoggedOut();
+                }}
+              >
+                Logout
+              </Nav.Link>
             )}
-            {!isAuth() && (
-              <Fragment>
-                <Nav.Link href={"/login"}>Login</Nav.Link>
-                <Nav.Link href={"/register"}>Register</Nav.Link>
-              </Fragment>
-            )}
+            {!isAuth() && <Nav.Link href="/">Login</Nav.Link>}
+            {!isAuth() && <Nav.Link href="/register">Register</Nav.Link>}
           </Nav>
         </Navbar.Collapse>
       </Container>

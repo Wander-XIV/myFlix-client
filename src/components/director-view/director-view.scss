@@ -1,7 +1,8 @@
-.director-view {
-    color: rgb(245, 245, 245);
-  }
-  
-  .label {
-    font-weight: bold;
-  }
+$primary-text: #222;
+$border-color: #ddd;
+$primary-font: 'Roboto Condensed', sans-serif;
+
+.director-view{
+    color: $primary-text;
+    font-family: $primary-font;
+}

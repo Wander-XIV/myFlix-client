@@ -1,32 +1,15 @@
+$primary-text: #222;
+$border-color: #ddd;
+$primary-font: 'Roboto Condensed', sans-serif;
 
-// *{
-//     box-sizing: border-box;
-//   }
-//   .loginContainer{
-//     background: #495057;
-//     width: 100%;
-//     height: 100vh;
-//   }
-  
-//   .navbar{
-//     background: #376086;
-//   }
-  
-//   .loginCard {
-//     width: 100%;
-//     max-width: 400px;
-//     margin: auto;
-//     margin-top: 50px;
-//     background:white;
-//     color: black;
-//   }
-  
-//   .loginButton {
-//     width: 100%;
-//     display: block;
-//   }
-#login-form {
-  color: rgb(255, 255, 255);
-  position: absolute;
-  top: 50%;
+.form-wrapper{
+    border: 1px solid $border-color;
+    margin-top: 150px;
+    padding: 30px;
+}
+form input{
+    margin-bottom: 15px;
+}
+.welcome{
+    margin-bottom: 30px;
 }

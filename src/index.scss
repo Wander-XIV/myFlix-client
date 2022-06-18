@@ -1,8 +1,5 @@
-*{
-  box-sizing: border-box;
-}
+$color: steelblue;
 
-html, body, .app-container {
-  background-color:#333232;
-  font-family: 'Fira Sans', sans-serif;
+.my-flix {
+  color: $color;
 }

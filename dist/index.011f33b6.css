@@ -8,6 +8,31 @@
   position: absolute;
   top: 50%;
 }
+.movie-view {
+  color: rgb(245, 245, 245);
+}
+
+.label {
+  font-weight: bold;
+}
+.director-view {
+  color: #222;
+  font-family: "Roboto Condensed", sans-serif;
+}
+.genre-view {
+  color: #222;
+  font-family: "Roboto Condensed", sans-serif;
+}
+#profile-form {
+  background-color: rgb(90, 92, 97);
+  color: rgb(245, 245, 245);
+  position: absolute;
+  top: 30%;
+}
+
+#profile-form #movie-card {
+  color: rgb(9, 27, 73);
+}
 .main-view {
   row-gap: 30px;
 }
@@ -32,44 +57,8 @@
   border: 1px solid rgb(9, 27, 73);
   color: rgb(245, 245, 245);
 }
-.movie-view {
-  color: rgb(245, 245, 245);
-}
 
-.label {
-  font-weight: bold;
-}
-.director-view {
-  color: rgb(245, 245, 245);
-}
-
-.label {
-  font-weight: bold;
-}
-.genre-view {
-  color: rgb(245, 245, 245);
-}
-
-.label {
-  font-weight: bold;
-}
-#profile-form {
-  background-color: rgb(90, 92, 97);
-  color: rgb(245, 245, 245);
-  position: absolute;
-  top: 30%;
-}
-
-#profile-form #movie-card {
-  color: rgb(9, 27, 73);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html, body, .app-container {
-  background-color: #333232;
-  font-family: "Fira Sans", sans-serif;
+.my-flix {
+  color: steelblue;
 }
 /*# sourceMappingURL=index.011f33b6.css.map */
