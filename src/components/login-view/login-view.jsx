@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { Row, Col, Form, Button, Card } from "react-bootstrap";
 import axios from "axios";
-
-import { Button, Col, Container, Form, Row } from "react-bootstrap/";
-
 import "./login-view.scss";
 
 export function LoginView(props) {
@@ -12,21 +10,20 @@ export function LoginView(props) {
   const [usernameErr, setUsernameErr] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
 
-  // validate user inputs
   const validate = () => {
     let isReq = true;
     if (!username) {
-      setUsernameErr("Username required");
+      setUsernameErr("Username Required");
       isReq = false;
     } else if (username.length < 2) {
-      setUsernameErr("Username must be at least 5 characters long");
+      setUsernameErr("Username must be 2 characters long");
       isReq = false;
     }
     if (!password) {
-      setPasswordErr("Password required");
+      setPasswordErr("Password Required");
       isReq = false;
-    } else if (password.length < 6) {
-      setPasswordErr("Password must be at least 6 characters long");
+    } else if (password.length < 5) {
+      setPasswordErr("Password must be 5 characters long");
       isReq = false;
     }
     return isReq;
@@ -35,8 +32,8 @@ export function LoginView(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const isReq = validate();
+
     if (isReq) {
-      /* Send a request to the server for authentication */
       axios
         .post("https://myflix-db14.herokuapp.com/login", {
           Username: username,
@@ -53,41 +50,48 @@ export function LoginView(props) {
   };
 
   return (
-    <Container id="login-form">
-      <Row className="justify-content-center">
-        <Col sm="10" md="8" lg="6">
+    <div className="login-page">
+      <Card style={{ width: "40vw" }}>
+        <Card.Body>
+          <Card.Title className="fw-bolder">Login</Card.Title>
           <Form>
             <Form.Group controlId="formUsername">
               <Form.Label>Username:</Form.Label>
               <Form.Control
                 type="text"
+                placeholder="Enter username"
+                value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Username"
               />
-              {/* display validation error */}
+              {/* code added here to display validation error */}
               {usernameErr && <p>{usernameErr}</p>}
             </Form.Group>
-            <Form.Group controlId="formPassword" className="mt-3">
-              <Form.Label>Password:</Form.Label>
+
+            <Form.Group controlId="formPassword">
+              <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
-                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
-              {/* display validation error */}
+              {/* code added here to display validation error */}
               {passwordErr && <p>{passwordErr}</p>}
             </Form.Group>
-            <Row className="mt-3 justify-content-start">
-              <Col sm="10" md="8" lg="6">
-                <Button variant="warning" type="submit" onClick={handleSubmit}>
-                  Login
-                </Button>
-              </Col>
-            </Row>
           </Form>
-        </Col>
-      </Row>
-    </Container>
+
+          <div className="mt-2">
+            <Button
+              variant="outline-primary"
+              type="submit"
+              onClick={handleSubmit}
+            >
+              Login
+            </Button>
+          </div>
+        </Card.Body>
+      </Card>
+    </div>
   );
 }
 
