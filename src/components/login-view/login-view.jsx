@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Row, Col, Form, Button } from "react-bootstrap";
+import { Row, Col, Form, Button, Card } from "react-bootstrap";
 import axios from "axios";
 import "./login-view.scss";
 
@@ -50,44 +50,48 @@ export function LoginView(props) {
   };
 
   return (
-    <Row className="justify-content-md-center">
-      <Col md={5} className="form-wrapper">
-        <Form>
-          <h3 className="text-center welcome">
-            Welcome to My Flix Application
-          </h3>
-          <Form.Group controlId="formUsername">
-            <Form.Label>Username:</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
+    <div className="login-page">
+      <Card style={{ width: "40vw" }}>
+        <Card.Body>
+          <Card.Title className="fw-bolder">Login</Card.Title>
+          <Form>
+            <Form.Group controlId="formUsername">
+              <Form.Label>Username:</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              {/* code added here to display validation error */}
+              {usernameErr && <p>{usernameErr}</p>}
+            </Form.Group>
 
-            {usernameErr && <p>{usernameErr}</p>}
-          </Form.Group>
-          <Form.Group controlId="formPassword">
-            <Form.Label>Password:</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <Form.Group controlId="formPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {/* code added here to display validation error */}
+              {passwordErr && <p>{passwordErr}</p>}
+            </Form.Group>
+          </Form>
 
-            {passwordErr && <p>{passwordErr}</p>}
-          </Form.Group>
-          <Button
-            variant="outline-primary"
-            type="submit"
-            onClick={handleSubmit}
-          >
-            Login
-          </Button>
-        </Form>
-      </Col>
-    </Row>
+          <div className="mt-2">
+            <Button
+              variant="outline-primary"
+              type="submit"
+              onClick={handleSubmit}
+            >
+              Login
+            </Button>
+          </div>
+        </Card.Body>
+      </Card>
+    </div>
   );
 }
 
