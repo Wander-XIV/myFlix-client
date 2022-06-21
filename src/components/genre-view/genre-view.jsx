@@ -5,14 +5,14 @@ import "./genre-view.scss";
 
 export class GenreView extends React.Component {
   render() {
-    const { genre, onBackClick } = this.props;
+    const { Genre, onBackClick } = this.props;
     return (
       <Row className="justify-content-md-center">
         <Col md={6}>
           <Card className="genre-view">
             <Card.Body>
-              <Card.Title>{genre.Name}</Card.Title>
-              <Card.Text>Bio: {genre.Description}</Card.Text>
+              <Card.Title>{Genre.Name}</Card.Title>
+              <Card.Text>Bio: {Genre.Description}</Card.Text>
               <Button
                 variant="outline-primary"
                 onClick={() => {
@@ -30,7 +30,7 @@ export class GenreView extends React.Component {
 }
 
 GenreView.propTypes = {
-  genre: PropTypes.shape({
+  Genre: PropTypes.shape({
     Name: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
   }).isRequired,
