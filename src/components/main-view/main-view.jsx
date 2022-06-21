@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { setMovies, setUser } from "../../actions/actions";
 import MoviesList from "../movies-list/movies-list";
 
-import { Navbar } from "../navbar/navbar";
+import Navbar from "../navbar/navbar";
 import { LoginView } from "../login-view/login-view";
 import { RegistrationView } from "../registration-view/registration-view";
 import { MovieView } from "../movie-view/movie-view";
