@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { setMovies, setUser } from "../../actions/actions";
 import MoviesList from "../movies-list/movies-list";
 
-import { Navbar } from "../navbar-view/navbar-view";
+import { Navbar } from "../navbar/navbar";
 import { LoginView } from "../login-view/login-view";
 import { RegistrationView } from "../registration-view/registration-view";
 import { MovieView } from "../movie-view/movie-view";
@@ -110,9 +110,9 @@ class MainView extends React.Component {
                   return (
                     <Col>
                       <GenreView
-                        genre={
-                          movies.find((m) => m.genre.Name === match.params.Name)
-                            .genre
+                        Genre={
+                          movies.find((m) => m.Genre.Name === match.params.name)
+                            .Genre
                         }
                         onBackClick={() => history.goBack()}
                       />
@@ -125,16 +125,16 @@ class MainView extends React.Component {
               path="/director/:name"
               render={({ match, history }) => {
                 if (movies.length === 0) return <div className="main-view" />;
-
+                console.log(match.params.name);
+                const found = movies.find(
+                  (m) => m.Director.Name === match.params.name
+                );
+                console.log(found);
                 if (user)
                   return (
                     <Col>
                       <DirectorView
-                        Director={
-                          movies.find(
-                            (m) => m.director.Name === match.params.Name
-                          ).director
-                        }
+                        Director={found.Director}
                         onBackClick={() => history.goBack()}
                       />
                     </Col>
