@@ -1,0 +1,12 @@
+$primary-text: #222;
+$border-color: #ddd;
+$primary-font: 'Roboto Condensed', sans-serif;
+
+.mainNav{
+    margin-bottom: 20px;
+    color: $primary-text;
+    font-family: $primary-font;
+}
+.nav-items a{
+ text-transform: capitalize;
+}

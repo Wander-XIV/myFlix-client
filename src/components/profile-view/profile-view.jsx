@@ -18,11 +18,11 @@ export class ProfileView extends React.Component {
   constructor() {
     super();
     this.state = {
-      Username: null,
-      Password: null,
-      Email: null,
-      Birthday: null,
-      FavoriteMovies: [],
+      username: null,
+      password: null,
+      email: null,
+      birthday: null,
+      favoriteMovies: [],
     };
   }
   componentDidMount() {
@@ -39,11 +39,11 @@ export class ProfileView extends React.Component {
       })
       .then((response) => {
         this.setState({
-          Username: response.data.Username,
-          Password: response.data.Password,
-          Email: response.data.Email,
-          Birthday: response.data.Birthday,
-          FavoriteMovies: response.data.FavoriteMovies,
+          username: response.data.Username,
+          password: response.data.Password,
+          email: response.data.Email,
+          birthday: response.data.Birthday,
+          favoriteMovies: response.data.FavoriteMovies,
         });
       })
       .catch(function (error) {
@@ -60,10 +60,10 @@ export class ProfileView extends React.Component {
       .put(
         `https://myflix-db14.herokuapp.com/users/${username}`,
         {
-          Username: this.state.Username,
-          Password: this.state.Password,
-          Email: this.state.Email,
-          Birthday: this.state.Birthday,
+          Username: this.state.username,
+          Password: this.state.password,
+          Email: this.state.email,
+          Birthday: this.state.birthday,
         },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -149,25 +149,25 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const { Movies } = this.props;
-    const { FavoriteMovies, Username, Email, Birthday } = this.state;
+    const { movies } = this.props;
+    const { favoriteMovies, username, email, birthday } = this.state;
 
-    if (!Username) {
+    if (!username) {
       return null;
     }
 
     return (
-      <Container>
+      <Container className="profile-page">
         <Row>
           <Col md={4}>
             <Card className="profile-info">
               <Card.Body>
                 <Card.Title>Your Info</Card.Title>
                 <Card.Text className="info-username">
-                  Name: {Username}
+                  Name: {username}
                 </Card.Text>
-                <Card.Text className="">Email: {Email}</Card.Text>
-                <Card.Text className="">Birthday: {Birthday}</Card.Text>
+                <Card.Text className="">Email: {email}</Card.Text>
+                <Card.Text className="">Birthday: {birthday}</Card.Text>
               </Card.Body>
             </Card>
           </Col>
@@ -194,7 +194,7 @@ export class ProfileView extends React.Component {
                       className="username"
                       name="username"
                       placeholder="New username"
-                      value={Username}
+                      value={username}
                       onChange={(e) => this.setUsername(e.target.value)}
                       required
                     />
@@ -216,7 +216,7 @@ export class ProfileView extends React.Component {
                       type="email"
                       name="email"
                       placeholder="Enter email"
-                      value={Email}
+                      value={email}
                       onChange={(e) => this.setEmail(e.target.value)}
                       required
                     />
@@ -226,7 +226,7 @@ export class ProfileView extends React.Component {
                     <FormControl
                       type="date"
                       name="birthday"
-                      value={Birthday}
+                      value={birthday}
                       onChange={(e) => this.setBirthday(e.target.value)}
                       required
                     />
@@ -250,13 +250,13 @@ export class ProfileView extends React.Component {
           </Col>
         </Row>
         <Row className="favorite-container">
-          {FavoriteMovies.length === 0 && (
+          {favoriteMovies.length === 0 && (
             <div className="text-center">No favorite movies</div>
           )}
-          {FavoriteMovies.length > 0 &&
-            Movies.map((movie) => {
+          {favoriteMovies.length > 0 &&
+            movies.map((movie) => {
               if (
-                movie._id === FavoriteMovies.find((fav) => fav === movie._id)
+                movie._id === favoriteMovies.find((fav) => fav === movie._id)
               ) {
                 return (
                   <Col md={4} key={movie._id}>
@@ -274,7 +274,7 @@ export class ProfileView extends React.Component {
                         <Button
                           value={movie._id}
                           variant="outline-danger"
-                          onClick={(e) => this.removeFavorite(e, Movie)}
+                          onClick={(e) => this.removeFavorite(e, movie)}
                         >
                           Remove
                         </Button>
@@ -300,7 +300,7 @@ ProfileView.propTypes = {
         Name: PropTypes.string.isRequired,
         Description: PropTypes.string.isRequired,
       }).isRequired,
-      director: PropTypes.shape({
+      Director: PropTypes.shape({
         Name: PropTypes.string.isRequired,
         Bio: PropTypes.string.isRequired,
         Birth: PropTypes.string.isRequired,
