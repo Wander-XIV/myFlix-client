@@ -3,19 +3,22 @@ import PropTypes from "prop-types";
 import { Card, Row, Col, Button } from "react-bootstrap";
 import "./director-view.scss";
 
+import { Link } from "react-router-dom";
+
 export class DirectorView extends React.Component {
   render() {
-    const { director, onBackClick } = this.props;
+    const { Director, onBackClick } = this.props;
     return (
       <Row className="justify-content-md-center">
         {console.log("Success")}
         <Col md={6}>
           <Card className="director-view">
             <Card.Body>
-              <Card.Title>{director.Name}</Card.Title>
-              <Card.Text>Bio: {director.Bio}</Card.Text>
-              <Card.Text>Birth: {director.Birth}</Card.Text>
-              <Card.Text>Death: {director.Death}</Card.Text>
+              <Card.Title>{Director.Name}</Card.Title>
+              <Card.Text>Bio: {Director.Bio}</Card.Text>
+              <Card.Text>Birth: {Director.Birth}</Card.Text>
+              <Card.Text>Death: {Director.Death}</Card.Text>
+              <Link></Link>
               <Button
                 variant="outline-primary"
                 onClick={() => {
@@ -33,10 +36,10 @@ export class DirectorView extends React.Component {
 }
 
 DirectorView.propTypes = {
-  director: PropTypes.shape({
+  Director: PropTypes.shape({
     Name: PropTypes.string.isRequired,
     Bio: PropTypes.string.isRequired,
     Birth: PropTypes.string.isRequired,
     Death: PropTypes.string,
-  }).isRequired,
+  }),
 };
