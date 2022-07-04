@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import "./movie-view.scss";
+import Navbar from "../navbar/navbar";
 
 import { Link } from "react-router-dom";
 

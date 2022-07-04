@@ -44,6 +44,15 @@ form input {
 .info-buttons {
   margin-right: 10px;
 }
+.mainNav {
+  margin-bottom: 20px;
+  color: #222;
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.nav-items a {
+  text-transform: capitalize;
+}
 .movie-card-wrapper {
   color: #222;
   font-family: "Roboto Condensed", sans-serif;
@@ -64,15 +73,6 @@ form input {
 }
 .search-filter {
   margin-bottom: 1em;
-}
-.mainNav {
-  margin-bottom: 20px;
-  color: #222;
-  font-family: "Roboto Condensed", sans-serif;
-}
-
-.nav-items a {
-  text-transform: capitalize;
 }
 .director-view {
   color: #222;

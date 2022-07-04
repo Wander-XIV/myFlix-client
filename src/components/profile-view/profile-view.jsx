@@ -1,6 +1,7 @@
 import React from "react";
 import "./profile-view.scss";
 import PropTypes from "prop-types";
+import Navbar from "../navbar/navbar";
 
 import {
   Container,
